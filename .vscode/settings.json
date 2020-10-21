@@ -1,0 +1,18 @@
+{
+  "tailwindCSS.emmetCompletions": true,
+  "[svelte]": {
+    "files.autoGuessEncoding": false,
+    "files.encoding": "utf8"
+  },
+  "[javascript]": {
+    "files.autoGuessEncoding": false,
+    "files.encoding": "utf8"
+  },
+  "[typescript]": {
+    "files.autoGuessEncoding": false,
+    "files.encoding": "utf8"
+  },
+  "css.validate": false,
+  "svelte.plugin.css.diagnostics.enable": false,
+  "stylelint.enable": true
+}
