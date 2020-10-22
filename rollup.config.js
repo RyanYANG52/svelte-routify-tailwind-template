@@ -1,10 +1,11 @@
 import { createRollupConfigs } from './scripts/base.config.js';
-import autoPreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import replace from '@rollup/plugin-replace';
 
 import { injectManifest } from 'rollup-plugin-workbox';
 const workboxConfig = require('./workbox-config.js');
+
+const { createPreprocessors } = require("./svelte.config.js")
 
 const production = !process.env.ROLLUP_WATCH;
 process.env.NODE_ENV = production ? 'production' : 'development';
@@ -33,14 +34,8 @@ export const config = {
 		return rollup;
 	},
 	svelteWrapper: (svelte) => {
-		(svelte.css = (css) => css.write(`${buildDir}/bundle.css`, !production)),
-			(svelte.preprocess = [
-				autoPreprocess({
-					postcss: true,
-					sourceMap: !production,
-					defaults: { style: 'postcss', script: 'typescript' },
-				}),
-			]);
+		svelte.css = (css) => css.write(`${buildDir}/bundle.css`, !production);
+		svelte.preprocess = createPreprocessors({sourceMap: !production})
 	},
 	swWrapper: (worker) => {
 		if (process.env.SW) {

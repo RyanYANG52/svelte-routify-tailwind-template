@@ -14,5 +14,5 @@
   },
   "css.validate": false,
   "svelte.plugin.css.diagnostics.enable": false,
-  "stylelint.enable": true
+  "stylelint.enable": false
 }
