@@ -3,9 +3,12 @@ import autoPreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import replace from '@rollup/plugin-replace';
 
+import { injectManifest } from 'rollup-plugin-workbox';
+const workboxConfig = require('./workbox-config.js');
+
 const production = !process.env.ROLLUP_WATCH;
 process.env.NODE_ENV = production ? 'production' : 'development';
-const buildDir = `dist/build`;
+const buildDir = 'dist/build';
 
 export const config = {
 	staticDir: 'static',
@@ -14,7 +17,7 @@ export const config = {
 	serve: !production,
 	production,
 	rollupWrapper: (rollup) => {
-		rollup.input = `src/main.ts`;
+		rollup.input = 'src/main.ts';
 		rollup.output.sourcemap = !production;
 		rollup.plugins = [
 			...rollup.plugins,
@@ -22,7 +25,7 @@ export const config = {
 			replace({
 				process: JSON.stringify({
 					env: {
-						PROD: production,
+						SW: process.env.SW == 'true',
 					},
 				}),
 			}),
@@ -39,10 +42,27 @@ export const config = {
 				}),
 			]);
 	},
-	swWrapper: (worker) => worker,
+	swWrapper: (worker) => {
+		if (process.env.SW) {
+			worker.output.sourcemap = !production;
+			worker.plugins = [
+				{
+					name: 'watch-app',
+					buildStart() {
+						this.addWatchFile(buildDir);
+					},
+				},
+				...worker.plugins,
+				injectManifest(workboxConfig),
+			];
+			return worker;
+		} else {
+			return true;
+		}
+	},
 };
 
-const configs = createRollupConfigs(config);
+const configs = createRollupConfigs(config).filter((c) => typeof c === 'object');
 
 export default configs;
 

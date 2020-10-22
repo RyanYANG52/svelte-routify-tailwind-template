@@ -1,7 +1,7 @@
 declare global {
     interface Process {
       env: {
-        PROD: boolean,
+        SW: boolean,
       };
     }
     const process: Process

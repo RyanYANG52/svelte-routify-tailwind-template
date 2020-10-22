@@ -8,7 +8,7 @@ export default app;
 
 /** Service worker. Uncomment to use service worker */
 
-if (process.env.PROD && 'serviceWorker' in navigator) {
+if (process.env.SW && 'serviceWorker' in navigator) {
     //@ts-ignore
     import('workbox-window').then(async ({ Workbox }) => {
         const wb = new Workbox('/sw.js')
