@@ -5,15 +5,15 @@
 	metatags.description = 'Description coming soon...';
 </script>
 
-<style>
-	a {
-		@apply text-teal-500 mx-auto hover:underline;		
-	}
-</style>
+<h1 class="text-xl">Routify Starter Template</h1>
 
+<p>
+	To see an example app that shows off a lot of Routify's features, go to <a
+		class="text-blue-500"
+		href="/example">/example</a>
+</p>
 
-<h1 class="text-center text-6xl m-8 text-teal-500">svelte-routify-tailwind-template</h1>
-
-<div class="flex flex-col items-center">
-	<a href="https://github.com/RyanYANG52/svelte-routify-tailwind-template">github link</a>
-</div>
+<p>
+	This template is ready to be used in production! just delete the example app at:
+	src/pages/example
+</p>
