@@ -10,7 +10,8 @@
 <p>
 	To see an example app that shows off a lot of Routify's features, go to <a
 		class="text-blue-500"
-		href="/example">/example</a>
+		href="/example">/example</a
+	>
 </p>
 
 <p>

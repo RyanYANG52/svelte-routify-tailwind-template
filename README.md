@@ -12,5 +12,5 @@ npx degit RyanYANG52/svelte-routify-tailwind-template
 ## Features
 - Base on latest [Routify Starter](https://github.com/roxiness/routify-starter): Vite + Routify
 - [Typescript](https://svelte.dev/blog/svelte-and-typescript)
-- Postcss: Tailwindcss
+- Postcss: Tailwind css 3.0
 - Prettier: npm run check, npm run format
